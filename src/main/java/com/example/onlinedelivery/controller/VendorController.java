@@ -63,7 +63,7 @@ public class VendorController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/id")
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
 	public ResponseEntity<ResponseMessage> getVendorById(@PathVariable("id") int id) {
 		ResponseMessage response = new ResponseMessage();
 		Optional<Vendor> vendor = vendorService.getInfoById(id);
@@ -73,7 +73,7 @@ public class VendorController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/id")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public ResponseEntity<ResponseMessage> deleteVendor(@PathVariable("id") int id) {
 		ResponseMessage response = new ResponseMessage();
 	
