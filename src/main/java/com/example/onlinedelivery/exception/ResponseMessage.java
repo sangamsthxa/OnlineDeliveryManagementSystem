@@ -6,7 +6,7 @@ import java.util.Map;
 import lombok.Data;
 
 @Data
-public class ResponseMessage<T> {
+public class ResponseMessage {
 
 	private int statusCode;
 
@@ -16,7 +16,6 @@ public class ResponseMessage<T> {
 
 	private Map<String, String> errors;
 	
-	private T body;
 
 }
 

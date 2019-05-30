@@ -1,7 +1,5 @@
 package com.example.onlinedelivery.exception;
 
-
-
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -13,7 +11,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 
 
 @RestControllerAdvice
@@ -31,4 +28,3 @@ public class GlobalException extends ResponseEntityExceptionHandler {
 	}
 
 }
-
