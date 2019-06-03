@@ -21,26 +21,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.onlinedelivery.exception.ResponseMessage;
-import com.example.onlinedelivery.model.Blog;
-import com.example.onlinedelivery.repositories.BlogRepository;
+import com.example.onlinedelivery.model.AboutUs;
+import com.example.onlinedelivery.repositories.AboutUsRepository;
 import com.example.onlinedelivery.services.GenericService;
 
-@RequestMapping("/api/blog")
+@RequestMapping("/api/aboutUs")
 @RestController
-public class BlogController {
+public class AboutUsController {
 	@Autowired
-	private GenericService<Blog> blogService;
+	private GenericService<AboutUs> aboutUsService;
 	
 	@Autowired
-	private BlogRepository blogRepo;
+	private AboutUsRepository aboutUsRepo;
 	
 	@PostMapping("/save")
-	public ResponseEntity<ResponseMessage> saveBlog(@Valid @RequestBody Blog blog, Errors error) {
+	public ResponseEntity<ResponseMessage> saveAboutUs(@Valid @RequestBody AboutUs aboutUs, Errors error) {
 		ResponseMessage response = new ResponseMessage();
 
-		blog.setCreatedAt(new Date());
-		blog.setUpdatedAt(new Date());
-		blogService.saveInfo(blog);
+		aboutUs.setCreatedAt(new Date());
+		aboutUs.setUpdatedAt(new Date());
+		aboutUsService.saveInfo(aboutUs);
 		response.setErrors(null);
 		response.setMessage("Success");
 		response.setStatus(true);
@@ -50,13 +50,13 @@ public class BlogController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<ResponseMessage> updateBlog(@Valid @RequestBody Blog blog, Errors error) {
+	public ResponseEntity<ResponseMessage> updateAboutUs(@Valid @RequestBody AboutUs aboutUs, Errors error) {
 
 		ResponseMessage response = new ResponseMessage();
 
-		blog.setCreatedAt(new Date());
-		blog.setUpdatedAt(new Date());
-		blogService.updateInfo(blog);
+		aboutUs.setCreatedAt(new Date());
+		aboutUs.setUpdatedAt(new Date());
+		aboutUsService.updateInfo(aboutUs);
 		response.setErrors(null);
 		response.setMessage("Success");
 		response.setStatus(true);
@@ -68,7 +68,7 @@ public class BlogController {
 	public ResponseEntity<ResponseMessage> deleteById(@PathVariable("id") int id) {
 		ResponseMessage response = new ResponseMessage();
 
-		boolean status = blogRepo.existsById(id);
+		boolean status = aboutUsRepo.existsById(id);
 		if (!status) {
 			Map<String, String> err = new HashMap<>();
 			err.put("Error", "ID not Exist");
@@ -79,7 +79,7 @@ public class BlogController {
 			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 		} else {
 			try {
-				blogRepo.deleteById(id);
+				aboutUsRepo.deleteById(id);
 				response.setErrors(null);
 				response.setMessage("Success");
 				response.setStatus(true);
@@ -98,12 +98,13 @@ public class BlogController {
 	}
 
 	@GetMapping("/list")
-	public List<Blog> getAllBlogInfo() {
-		List<Blog> blog = blogRepo.findAll();
-		if (blog.isEmpty()) {
+	public List<AboutUs> getAllAboutUsInfo() {
+		List<AboutUs> aboutUs = aboutUsRepo.findAll();
+		if (aboutUs.isEmpty()) {
 			throw new RuntimeException("blog List not Exist");
 		}
-		return blog;
+		return aboutUs;
 	}
+	
 
 }

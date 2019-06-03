@@ -12,11 +12,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name= "blog")
+@Table(name= "about_us")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Blog extends AuditModel {
-
+public class AboutUs extends AuditModel{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -26,5 +25,4 @@ public class Blog extends AuditModel {
 	@Lob
 	private String description;
 
-	
 }
