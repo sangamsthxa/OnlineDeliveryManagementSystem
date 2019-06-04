@@ -1,10 +1,14 @@
 package com.example.onlinedelivery.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -25,7 +29,9 @@ public class Notification extends AuditModel {
 	@Column(name="notification_type", nullable=false)
 	private String notificationType;
 	
-//	private DeliveryService service;
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="service_id")
+	private DeliveryService service;
 	
 //	private Vendor vendor;
 	
