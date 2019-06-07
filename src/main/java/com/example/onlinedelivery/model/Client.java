@@ -53,6 +53,9 @@ public class Client extends AuditModel {
 	@NotNull(message = "Cannot be Empty")
 	private Date dob;
 	
+	@Column(name="mobile_no", unique= true)
+	private String contactNo;
+	
 	@Column(name="gender", nullable = false)
 	private String gender;
 
