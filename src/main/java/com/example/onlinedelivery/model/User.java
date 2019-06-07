@@ -1,12 +1,14 @@
 package com.example.onlinedelivery.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,16 +20,30 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "vendor")
+@Table(name = "user")
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class Vendor extends AuditModel {
+public class User {
+
+//    private Long id;
+//
+//    private String username;
+//
+//    private String password;
+//
+//    @javax.persistence.Transient
+//    private String passwordConfirm;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
+	private String username;
+
+	private String password;
+
+	@javax.persistence.Transient
+	private String passwordConfirm;
 
 	@Column(name = "first_name", nullable = false)
 	@Size(message = "First Name should be atleast 2 characters")
@@ -56,5 +72,8 @@ public class Vendor extends AuditModel {
 
 	@Column(name = "gender", nullable = false)
 	private String gender;
+
+	@ManyToMany
+	private Set<Role> roles;
 
 }

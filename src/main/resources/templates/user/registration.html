@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <style>
+        .form-box{
+    		margin-top: 40px;
+    		border-radius: 10px;
+    		padding: 30px 20px;
+    		background-color: #f3f3f3;
+    		box-sizing: border-box;
+    		box-shadow: 10px 10px 5px #333;
+    	}
+
+    	.heading{
+    		font-size: 2rem;
+    		 color: red; 
+    		 font-style: oblique;
+    	}
+.container{
+    margin-top:20px;
+}
+.image-preview-input {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+
+
+    </style>
+    <th:block th:include="admin/fragements/header :: head"></th:block>
+</head>
+
+<body>
+<header class="site-header">
+    <div class="container">
+      <h1 class="school-logo-text float-left"><a href="#"><strong>Online Delivery Service</strong> </a></h1>
+      <span class="js-search-trigger site-header__search-trigger"><i class="fa fa-search" aria-hidden="true"></i></span>
+      <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
+      <div class="site-header__menu group">
+        <nav class="main-navigation">
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Locations</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </nav>
+       
+      </div>
+    </div>
+  </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form class="form-box" id="userForm", method="POST" >
+                <br>
+                    <h2 class="heading" align="center"><strong>Registration</strong></h2><br>
+                    
+                     <div class="form-group row">
+                        <label for="username" class="col-sm-3 col-form-label">User Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control"  name="username" id="username">
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label for="password" class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control"  name="password" id="password">
+                        </div>
+                    </div>
+                     <div class="form-group row">
+                        <label for="passwordConfirm" class="col-sm-3 col-form-label">Confirm Password</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control"  name="passwordConfirm" id="passwordConfirm">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="firstName" class="col-sm-3 col-form-label">First Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control"  name="firstName" id="firstName" placeholder="Enter First Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lastName" class="col-sm-3 col-form-label">Last Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control"  name="lastName" id="lastName" placeholder="Enter Last Name">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control"  name="email" id="email" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="address" class="col-sm-3 col-form-label">Address</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control"  name="address"  id="address" placeholder="Enter your Address">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="contactNo" class="col-sm-3 col-form-label">Contact No.</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control"   name="contactNo" id="contactNo" placeholder="Enter your Contact No.">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="dob" class="col-sm-3 col-form-label">Date of Birth</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control"   name="dob" id="dob" placeholder="Enter Date of Birth">
+                        </div>
+                    </div>
+                    <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">Gender</legend>
+                            <div class="col-sm-8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender"   id="gender" value="option1" checked>
+                                    <label class="form-check-label" for="gender">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender"  id="gender" value="option2">
+                                    <label class="form-check-label" for="gender">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div> 
+                    </fieldset>
+                 
+                    <br><br>
+                    <div class="form-group row" align="center">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </div>
+                    
+                      <div class="form-group row" align="center">
+                        <div class="col-sm-10">
+                            <input type="button" value="Go back!" onclick="history.back()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    	<th:block th:include="admin/fragements/script :: body"></th:block>
+    	
+    <script type="text/javascript" th:src="@{./custom/userForm.js}"></script>
+    
+</body>
+
+
+
+</html>
