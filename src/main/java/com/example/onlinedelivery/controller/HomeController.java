@@ -27,6 +27,7 @@ public class HomeController {
 		model.addAttribute("userForm", "reg");
 		return "user/registration";
 	}
+	
 
 	@RequestMapping({ "/client" })
 	public String getClientHomePage(Model model) {

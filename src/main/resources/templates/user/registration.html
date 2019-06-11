@@ -50,32 +50,15 @@
 
 
     </style>
-    <th:block th:include="admin/fragements/header :: head"></th:block>
+    <th:block th:include="admin/fragements/head :: head"></th:block>
 </head>
 
 <body>
-<header class="site-header">
-    <div class="container">
-      <h1 class="school-logo-text float-left"><a href="#"><strong>Online Delivery Service</strong> </a></h1>
-      <span class="js-search-trigger site-header__search-trigger"><i class="fa fa-search" aria-hidden="true"></i></span>
-      <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
-      <div class="site-header__menu group">
-        <nav class="main-navigation">
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Locations</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </nav>
-       
-      </div>
-    </div>
-  </header>
+<th:block th:insert="admin/fragements/header :: header"></th:block>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <form class="form-box" id="userForm", method="POST" >
+                <form class="form-box" th:action="@{/save/registration}"   method="POST" >
                 <br>
                     <h2 class="heading" align="center"><strong>Registration</strong></h2><br>
                     

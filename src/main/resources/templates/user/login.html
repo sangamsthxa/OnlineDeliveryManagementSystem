@@ -26,27 +26,10 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
- <th:block th:include="admin/fragements/header :: head"></th:block>
+ <th:block th:include="admin/fragements/head :: head"></th:block>
 </head>
 <body>
- <header class="site-header">
-    <div class="container">
-      <h1 class="school-logo-text float-left"><a href="#"><strong>Online Delivery Service</strong> </a></h1>
-      <span class="js-search-trigger site-header__search-trigger"><i class="fa fa-search" aria-hidden="true"></i></span>
-      <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
-      <div class="site-header__menu group">
-        <nav class="main-navigation">
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Locations</a></li>
-            <li><a href="#">Blog</a></li>
-          </ul>
-        </nav>
-       
-      </div>
-    </div>
-  </header>
+<th:block th:insert="admin/fragements/header :: header"></th:block>
 	
 	<div class="limiter">
 		<div class="container-login100">
@@ -86,7 +69,7 @@
 							Don’t have an account?
 						</span>
 
-						<a class="txt2" href="#">
+						<a class="txt2" href="/registration">
 							Sign Up
 						</a>
 					</div>
