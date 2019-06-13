@@ -58,7 +58,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <form class="form-box" th:action="@{/save/registration}"   method="POST" >
+                <form class="form-box" th:action="@{/registration}"   method="POST" >
                 <br>
                     <h2 class="heading" align="center"><strong>Registration</strong></h2><br>
                     
@@ -123,15 +123,35 @@
                             <legend class="col-form-label col-sm-3 pt-0">Gender</legend>
                             <div class="col-sm-8">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender"   id="gender" value="option1" checked>
+                                    <input class="form-check-input" type="radio" name="gender"   id="gender" value="Male" checked>
                                     <label class="form-check-label" for="gender">
                                         Male
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender"  id="gender" value="option2">
+                                    <input class="form-check-input" type="radio" name="gender"  id="gender" value="Female">
                                     <label class="form-check-label" for="gender">
                                         Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div> 
+                    </fieldset>
+                    
+                       <fieldset class="form-group">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-3 pt-0">User Type</legend>
+                            <div class="col-sm-8">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="roles"   id="roles" value="VENDOR" checked>
+                                    <label class="form-check-label" for="User Type">
+                                        Vendor
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="roles"  id="roles" value="CLIENT">
+                                    <label class="form-check-label" for="roles">
+                                        Client
                                     </label>
                                 </div>
                             </div>

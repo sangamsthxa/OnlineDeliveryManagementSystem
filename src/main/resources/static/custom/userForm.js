@@ -79,7 +79,8 @@ $(document).ready(function(){
 				contactNo:$("#contactNo").val(),
 				gender:$("input[name='gender']:checked").val(),
 				address:$("#address").val(),
-				dob:$("#dob").val()
+				dob:$("#dob").val(),
+				roles:$("#roles").val()
 		}
 		console.log(formData)
 		$.ajax({

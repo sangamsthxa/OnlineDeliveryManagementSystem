@@ -38,12 +38,10 @@ public class UserController {
 
 	@CrossOrigin(origins = "http://localhost:8888")
 	@ResponseBody
-	@PostMapping("/save/registration")
+	@PostMapping("/registration")
 	public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
 
-		if (bindingResult.hasErrors()) {
-			return "user/registration";
-		}
+
 		System.out.println(userForm);
 		userService.save(userForm);
 		

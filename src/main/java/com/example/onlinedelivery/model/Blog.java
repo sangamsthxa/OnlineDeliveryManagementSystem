@@ -20,8 +20,10 @@ public class Blog extends AuditModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	@Column(name="title", nullable=false)
 	private String title;
+	
 	@Column(name="description", nullable=false)
 	@Lob
 	private String description;

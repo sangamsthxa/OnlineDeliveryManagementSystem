@@ -20,14 +20,14 @@ public class HomeController {
 		return "user/login";
 	}
 	
-	@RequestMapping({"/registration"})
-	public String getRegistrationPage(Model model) {
-		model.addAttribute("homepage", "item");
-		model.addAttribute("loginpage", "log");
-		model.addAttribute("userForm", "reg");
-		return "user/registration";
-	}
-	
+/*//	@RequestMapping({"/registration"})
+//	public String getRegistrationPage(Model model) {
+//		model.addAttribute("homepage", "item");
+//		model.addAttribute("loginpage", "log");
+//		model.addAttribute("userForm", "reg");
+//		return "user/registration";
+//	}
+	*/
 
 	@RequestMapping({ "/client" })
 	public String getClientHomePage(Model model) {

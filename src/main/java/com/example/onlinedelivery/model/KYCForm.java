@@ -35,7 +35,6 @@ public class KYCForm extends AuditModel {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "dob", nullable = false)
 	@NotNull(message = "Cannot be Empty")
-	
 	private Date dob;
 	
 	@Column(name="legal_doc",nullable=false)
