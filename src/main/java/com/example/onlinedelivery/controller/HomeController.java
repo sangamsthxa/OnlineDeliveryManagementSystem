@@ -36,4 +36,22 @@ public class HomeController {
 		model.addAttribute("clienthomepage", "nav-item active");
 		return "client/clienthomepage";
 	}
+	@RequestMapping({ "/aboutUs" })
+	public String getAboutUs(Model model) {
+		model.addAttribute("homepage", "item");
+		model.addAttribute("loginpage", "log");
+		model.addAttribute("clienthomepage", "nav-item active");
+		model.addAttribute("aboutuspage","nav-item");
+		return "user/aboutUs";
+	}
+	@RequestMapping({ "/services" })
+	public String getServices(Model model) {
+		model.addAttribute("homepage", "item");
+		model.addAttribute("loginpage", "log");
+		model.addAttribute("clienthomepage", "nav-item active");
+		model.addAttribute("aboutuspage","nav-item");
+		model.addAttribute("servicespage","nav-item");
+		
+		return "user/services";
+	}
 }

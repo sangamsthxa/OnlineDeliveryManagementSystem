@@ -1,10 +1,14 @@
 package com.example.onlinedelivery.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -21,6 +25,10 @@ public class VehicleType extends AuditModel {
 	
 	@Column(name="type", nullable=false)
 	private String vehicleType;
+	
+	@ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name="service_id")
+	private DeliveryService service;
 	
 	
 }

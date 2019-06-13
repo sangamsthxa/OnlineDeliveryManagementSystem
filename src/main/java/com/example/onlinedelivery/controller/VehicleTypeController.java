@@ -25,7 +25,7 @@ import com.example.onlinedelivery.model.VehicleType;
 import com.example.onlinedelivery.repositories.VehicleTypeRepository;
 import com.example.onlinedelivery.services.GenericService;
 
-@RequestMapping("/api/vehicleType")
+//@RequestMapping("/api/vehicleType")
 @RestController
 public class VehicleTypeController {
 
