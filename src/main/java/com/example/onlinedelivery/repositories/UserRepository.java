@@ -7,4 +7,6 @@ import com.example.onlinedelivery.model.User;
 public interface UserRepository extends JpaRepository<User, Long>{
 	User findByUsername(String username);
 
+	void save(org.springframework.security.core.userdetails.User user);
+
 }

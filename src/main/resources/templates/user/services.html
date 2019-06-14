@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+ <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+ 
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+    body {
+    font-family: 'Amaranth';font-size: 17px;
+}
+.services-section {
+    background: #e4dee5;
+    padding: 4em 0;
+}
+
+.site-title h3 {
+    color: #000000;
+    font-size: 2.5em;
+    margin: 0;
+    letter-spacing: 1px;
+    font-weight: 800;
+}
+.site-title p {
+    color: #999999;
+    font-size: .9em;
+    margin: 0;
+}
+.services-column h5 {
+    color: #000000;
+    font-size: 1.5em;
+    margin: .5em 0;
+    font-weight: 600;
+}
+.services-column p {
+    color: #212121;
+    font-size: .9em;
+    line-height: 1.8em;
+    margin: 0;
+}
+.icon {
+    color : red;
+    padding:15px;
+    font-size:40px;
+}
+    </style>
+    <th:block th:include="admin/fragements/head :: head"></th:block>
+</head>
+<body>
+<th:block th:insert="admin/fragements/header :: header"></th:block>
+<div class="services-section text-center">
+		<div class="container">
+			<div class="site-title">
+				<h3>Why Choose Us</h3>
+				<p>Vivamus pulvinar imperdiet</p>
+			</div>
+			<div class="services-three-columns">
+				<div class="col-md-4 services-column">
+					<span class="glyphicon glyphicon-cog icon"></span>
+					<h5>Curabitur viverra nunc</h5>
+					<p>Ut nulla libero, luctus quis varius efficitur, molestie non felis. Phasellus eget rutrum enim. Sed ac est tincidunt, tristique quam aliquam</p>
+				</div>
+				<div class="col-md-4 services-column">
+					<span class="glyphicon glyphicon-cog icon"></span>
+					<h5>Curabitur viverra nunc</h5>
+					<p>Ut nulla libero, luctus quis varius efficitur, molestie non felis. Phasellus eget rutrum enim. Sed ac est tincidunt, tristique quam aliquam</p>
+				</div>
+				<div class="col-md-4 services-column">
+					<span class="glyphicon glyphicon-cog icon"></span>
+					<h5>Curabitur viverra nunc</h5>
+					<p>Ut nulla libero, luctus quis varius efficitur, molestie non felis. Phasellus eget rutrum enim. Sed ac est tincidunt, tristique quam aliquam</p>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+	  <footer class="site-footer">
+
+    <div class="site-footer__inner container container--narrow">
+
+      <div class="group">
+
+        <div class="site-footer__col-one">
+          <h1 class="school-logo-text school-logo-text--alt-color"><a href="#"><strong>Online Delivery</strong> Service</a></h1>
+         
+        </div>
+
+        <div class="site-footer__col-two-three-group">
+          <div class="site-footer__col-two">
+            <h3 class="headline headline--small">Explore</h3>
+            <nav class="nav-list">
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Programs</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Location</a></li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="site-footer__col-three">
+            <h3 class="headline headline--small">Learn</h3>
+            <nav class="nav-list">
+              <ul>
+                <li><a href="#">Legal</a></li>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Careers</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div class="site-footer__col-four">
+          <h3 class="headline headline--small">Connect With Us</h3>
+          <nav>
+            <ul class="min-list social-icons-list group">
+              <li><a href="#" class="social-color-facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li><a href="#" class="social-color-twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+              <li><a href="#" class="social-color-youtube"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+              <li><a href="#" class="social-color-linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="#" class="social-color-instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+  
+  
+  	<th:block th:include="admin/fragements/script :: body"></th:block>
+
+</body>
+</html>

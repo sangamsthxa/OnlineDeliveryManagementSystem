@@ -85,7 +85,7 @@ $(document).ready(function(){
 		console.log(formData)
 		$.ajax({
 			type : "POST",
-            url : "/save/registration",
+            url : "/registration",
             contentType:"application/json",
             data : JSON.stringify(formData),
             success : function(result) {

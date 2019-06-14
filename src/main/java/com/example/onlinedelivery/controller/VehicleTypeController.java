@@ -10,7 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.onlinedelivery.exception.ResponseMessage;
 import com.example.onlinedelivery.model.VehicleType;
@@ -26,7 +26,7 @@ import com.example.onlinedelivery.repositories.VehicleTypeRepository;
 import com.example.onlinedelivery.services.GenericService;
 
 //@RequestMapping("/api/vehicleType")
-@Controller
+@RestController
 public class VehicleTypeController {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class VehicleTypeController {
 	private VehicleTypeRepository vehicleTypeRepo;
 
 	@PostMapping("/save/vehicle")
-	@ResponseBody
+	@PreAuthorize("hasRole('ROLE_ADMIN')or hasRole('ROLE_CLIENT')or hasRole('ROLE_VENDOR')")
 	public ResponseEntity<ResponseMessage> saveVehicleType(@Valid @RequestBody VehicleType vt, Errors error) {
 		ResponseMessage response = new ResponseMessage();
 		System.out.println(vt);
