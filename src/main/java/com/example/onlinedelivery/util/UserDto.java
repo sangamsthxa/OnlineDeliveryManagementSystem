@@ -112,13 +112,8 @@ public class UserDto {
 		this.gender = gender;
 	}
 
-	@Override
-	public String toString() {
-		return "UserDto [userRole=" + userRole + ", username=" + username + ", password=" + password
-				+ ", passwordConfirm=" + passwordConfirm + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", address=" + address + ", dob=" + dob + ", contactNo=" + contactNo
-				+ ", gender=" + gender + "]";
-	}
+
+
 
 
 	

@@ -25,11 +25,7 @@ public class AdminWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 	
-/*	@Override
-	public void init(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/css/**", "/js/**", "/images/**", "/fonts/**",
-				"/bower_components/**", "/build/**", "/custom/**", "/dist/**", "/plugins/**", "/vendor/**");
-	}*/
+
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -49,6 +45,7 @@ public class AdminWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/client/**").hasRole("CLIENT")
 		.antMatchers("/vendor/**").hasRole("VENDOR")
+		
 		.anyRequest().authenticated()
 		.and()
 		.formLogin()
