@@ -37,8 +37,64 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"><script src='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'>
+
+</script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://kit.fontawesome.com/8348615f98.js"></script>
+  
+   <style>
+        .align{
+            position: relative;
+    top: 6px;
+    right: 20px;
+        }
+        .effect{
+            display: flex; justify-content:space-around;
+        }
+      #map { position:absolute; top:5px; bottom:0; left:80px; width:200%; }
+    .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 100px;
+  top: 0;
+  width: 50%; /* Full width */
+  height: 50%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 100px;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
  
- 
+</style>
+
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -254,72 +310,38 @@
     <!-- Main content -->
     <section class="content">
       <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>150</h3>
-
-              <p>New Services</p>
+     <div class="container buttom-container" style="padding:40px; display: flex; justify-content: space-around;">
+        <div class="effect">
+            <div class="align">
+            <button class="waves-effect waves-light btn" id="myBtn"  onclick="clicked = pickup" ><i class="fas fa-map-pin"></i>&nbsp; Pickup</button>
+    
             </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
+            <div>
+                <input type="text" placeholder="Pickup"></div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>53</h3>
-
-              <p>Total Services</p>
+        
+        <div class="effect">
+                <div class="align">
+                <button class="waves-effect waves-light btn" id="myBt"><i class="fas fa-map-pin"></i>&nbsp; Drop</button>
+                </div>
+                <div>
+                    <input type="text" placeholder="Drop"></div>
             </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>44</h3>
-
-              <p>User Registrations</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Total Vendors</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
+        <div class="align"><a class="waves-effect waves-light btn">&nbsp; Submit</a></div>
+    </div>
       
 
     </section>
+             <div id="myModal" class="modal">
+ <span class="close">&times;</span>
+  <!-- Modal content -->
+ 
+   <div>
+    <div id='map'></div>
+  </div>
+  
+</div>
+   
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -526,7 +548,64 @@
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
 
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+var bt = document.getElementById("myBt");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+bt.onclick = function() {
+	  modal.style.display = "block";
+	}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1Ijoic3RoYXNhbmdhbSIsImEiOiJjandlbTU5eTUwNnl4NDFtbW1yNGl5cDBrIn0.gOw8cWC_okRr_7GNiWry4Q';
+var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: {lat: 27.702983735525862 , lng: 85.31982421875}, // starting position
+    zoom: 15 // starting zoom
+});
+
+ var pickup= new mapboxgl.Marker({
+     draggable : true
+});
+ var clicked=pickup;
+ map.on('click', function (e) {
+	
+	        // e.point is the x, y coordinates of the mousemove event relative
+	        // to the top-left corner of the map
+	        JSON.stringify(e.point) + '<br />' +
+	        // e.lngLat is the longitude, latitude geographical position of the event
+	        JSON.stringify(e.lngLat);
+		var pick=clicked.setLngLat(e.lngLat)
+	    	.addTo(map);
+	console.log("pick",pick);
+	});
+
+
+</script>
 <!-- jQuery 3 -->
 <script th:src="@{../bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- jQuery UI 1.11.4 -->
