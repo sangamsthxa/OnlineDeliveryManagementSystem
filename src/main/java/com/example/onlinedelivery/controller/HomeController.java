@@ -68,6 +68,17 @@ public class HomeController {
 		
 		return "admin/locationservice/map";
 	}
+	@RequestMapping({ "/service_post" })
+	public String postService(Model model) {
+		model.addAttribute("index", "item");
+	    model.addAttribute("clienthomepage", "nav-item active");
+		model.addAttribute("aboutUs","nav-item");
+		model.addAttribute("services","nav-item");
+		model.addAttribute("map", "nav-item");
+		model.addAttribute("service","nav-item");
+		
+		return "user/map";
+	}
 	
 	
 }

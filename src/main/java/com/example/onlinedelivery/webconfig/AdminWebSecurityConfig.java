@@ -40,7 +40,7 @@ public class AdminWebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.sameOrigin()
 		.and().
 		authorizeRequests()
-		.antMatchers("/", "/home", "/login", "/registration").permitAll()
+		.antMatchers("/", "/home", "/login", "/registration","/aboutUs","/services").permitAll()
 		.anyRequest().authenticated()
 		.antMatchers("/admin/**").hasRole("ADMIN")
 		.antMatchers("/client/**").hasRole("CLIENT")
