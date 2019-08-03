@@ -544,7 +544,7 @@ map.addControl(geocoder2);
     latitude: user_coordinates.lat, 
     longitude: user_coordinates.lng
   }, function(err, res) {
-    console.log(err, res)
+    
   });
 
 			    // Listen for the `result` event from the MapboxGeocoder that is triggered when a user
@@ -560,7 +560,7 @@ map.addControl(geocoder2);
     latitude: user_coordinates.lat, 
     longitude: user_coordinates.lng
   }, function(err, res) {
-    console.log(err, res)
+
   });
    geocoder2.on('result', function(ev) {
 			        map.getSource('single-point').setData(ev.result.geometry);
@@ -597,11 +597,11 @@ map.addControl(geocoder2);
 
             itemsArray.push(items);
             localStorage.setItem('items', JSON.stringify(itemsArray));
-            console.log("lng",origin[0]);
+          
 
               // var query = 'https://api.mapbox.com/matching/v5/mapbox/' + profile + '/' + coordinates + '?geometries=geojson&radiuses=' + radiuses + '&steps=true&access_token=' + mapboxgl.accessToken;
               var query= 'https://api.mapbox.com/directions/v5/mapbox/driving/'+origin[0]+','+origin[1]+';'+destination[0]+','+destination[1]+'.json?access_token=pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw&steps=true&alternatives=true&geometries=geojson';
-              console.log("query",query);
+         
 
       $.ajax({
         method: 'GET',
@@ -610,6 +610,7 @@ map.addControl(geocoder2);
         // Get the coordinates from the response
         // var coords = data.matchings[0].geometry;
         // Draw the route on the map
+    
         console.log("coords",data.routes[0].distance);
 
         // addRoute(coords);
