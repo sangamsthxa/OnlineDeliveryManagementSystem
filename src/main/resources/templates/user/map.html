@@ -451,6 +451,8 @@ position:fixed;
 
 	var built_address1 = '';
 	var built_address2 ='';
+	var place1 = '';
+	var place2 ='';
 	var user_coordinates;
 	var geocode_results;
 
@@ -515,7 +517,11 @@ map.addControl(geocoder2);
 
 	});
 
-
+    if (typeof(Number.prototype.toRad) === 'undefined') { 
+    	Number.prototype.toRad = function() {
+    		return this * Math.PI / 180;     
+    		} 
+    }
 
 
 	function getUserLocation() {
@@ -553,6 +559,7 @@ map.addControl(geocoder2);
 			        map.getSource('single-point').setData(ev.result.geometry);
 			        console.log('ev',ev)
 			        built_address1 = ev.result.center;
+			        place1 = ev.result.text;
 
 			    });
 			                  geocoder2.mapboxClient
@@ -566,6 +573,7 @@ map.addControl(geocoder2);
 			        map.getSource('single-point').setData(ev.result.geometry);
 			        console.log('ev',ev)
 			        built_address2 = ev.result.center;
+			        place2 = ev.result.text;
 
 			    });
 
@@ -578,7 +586,11 @@ map.addControl(geocoder2);
 	}; /* END getUserLocation(); */
 
   $(document).ready(function(){
-  	$("#submitbtn").click(function(){
+	  var origin;
+	  var destination;
+	  var distance;
+  	$("#submitbtn").click(function(e){
+  		
   console.log("here");
   	console.log("address",built_address2);
   	let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
@@ -587,9 +599,10 @@ map.addControl(geocoder2);
 
             var items={};
 
-         
-         var origin = built_address1;
-          var destination=built_address2;
+         	origin =built_address1;
+         	destination = built_address2;
+          	source = place1;
+          	drop=place2;
 
            items.origin= origin;
            items.destination= destination;
@@ -597,7 +610,8 @@ map.addControl(geocoder2);
 
             itemsArray.push(items);
             localStorage.setItem('items', JSON.stringify(itemsArray));
-            console.log("lng",origin[0]);
+            console.log("lng",origin);
+          
 
               // var query = 'https://api.mapbox.com/matching/v5/mapbox/' + profile + '/' + coordinates + '?geometries=geojson&radiuses=' + radiuses + '&steps=true&access_token=' + mapboxgl.accessToken;
               var query= 'https://api.mapbox.com/directions/v5/mapbox/driving/'+origin[0]+','+origin[1]+';'+destination[0]+','+destination[1]+'.json?access_token=pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw&steps=true&alternatives=true&geometries=geojson';
@@ -610,12 +624,59 @@ map.addControl(geocoder2);
         // Get the coordinates from the response
         // var coords = data.matchings[0].geometry;
         // Draw the route on the map
-        console.log("coords",data.routes[0].distance);
-
+        console.log("coords",data);
+        distance=data.routes[0].distance;
+console.log("distance",distance);
         // addRoute(coords);
         // getInstructions(data.matchings[0]);
+e.preventDefault();
+calculateDistance();
+saveClientPostInfo();
       });
+    
   });
+  	function calculateDistance(){
+  	   var lat1=parseFloat(origin[1]);           
+  	   var lat2=parseFloat(destination[1]); 
+       var lon1=parseFloat(origin[0]);           
+       var lon2=parseFloat(destination[0]);           
+       var R = 6371e3; // metres           
+       var φ1 = lat1.toRad();           
+       var φ2 = lat2.toRad();           
+       var Δφ = (lat2-lat1).toRad();           
+       var Δλ = (lon2-lon1).toRad(); 
+       
+       var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);           
+       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+
+       var d = (R * c)/1000; 
+
+console.log("dis",d);  
+  		
+  	}
+  	function saveClientPostInfo(){
+ 
+  		var formData={
+  				
+  				source:source,
+  			destination:drop,
+  		distances:distance
+  		
+  		
+  		}
+  		console.log(formData) 
+  		$.ajax({
+  			type:"POST",
+  			contentType:"application/json",
+  			url:"/save/clientpost",
+  			data:JSON.stringify(formData),
+  			success:function(response){
+  				console.log("response",response);
+  			}
+  		})
+ 
+  	}		
+  	
   });
   	
 

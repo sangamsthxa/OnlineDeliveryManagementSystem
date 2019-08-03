@@ -79,6 +79,18 @@ public class HomeController {
 		
 		return "user/map";
 	}
+	@RequestMapping({ "/service_list" })
+	public String getService(Model model) {
+		model.addAttribute("index", "item");
+	    model.addAttribute("clienthomepage", "nav-item active");
+		model.addAttribute("aboutUs","nav-item");
+		model.addAttribute("services","nav-item");
+		model.addAttribute("map", "nav-item");
+		model.addAttribute("service","nav-item");
+		model.addAttribute("serviceList","nav-item");
+		return "user/formdata";
+	}
+	
 	
 	
 }
