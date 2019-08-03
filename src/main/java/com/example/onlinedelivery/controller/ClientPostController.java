@@ -1,0 +1,43 @@
+package com.example.onlinedelivery.controller;
+
+import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.onlinedelivery.model.ClientPost;
+import com.example.onlinedelivery.services.ClientPostServiceImpl;
+
+@Controller
+public class ClientPostController {
+	
+	@Autowired
+	private ClientPostServiceImpl clientPostService;
+	
+	
+	@PostMapping("/save/clientpost")
+	public ClientPost saveClientPost(@Valid @RequestBody ClientPost cp) {
+		
+		cp.setCreatedAt(new Date());
+		cp.setUpdatedAt(new Date());
+		System.out.println(cp);
+		return clientPostService.saveInfo(cp);
+		
+		
+	}
+	
+	@GetMapping("/get/clientpost")
+	@ResponseBody
+	public List<ClientPost> getAllClientPost(){
+		System.out.println("Inside route");
+		return clientPostService.getallInfo();
+	}
+
+}
