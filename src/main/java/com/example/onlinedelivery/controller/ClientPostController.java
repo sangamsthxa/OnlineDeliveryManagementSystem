@@ -2,12 +2,14 @@ package com.example.onlinedelivery.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,15 +31,23 @@ public class ClientPostController {
 		cp.setUpdatedAt(new Date());
 		System.out.println(cp);
 		return clientPostService.saveInfo(cp);
-		
-		
 	}
 	
 	@GetMapping("/get/clientpost")
 	@ResponseBody
 	public List<ClientPost> getAllClientPost(){
-		System.out.println("Inside route");
-		return clientPostService.getallInfo();
+		List<ClientPost> clist= clientPostService.getallInfo();
+		if(clist.isEmpty()) {
+			throw new RuntimeException("Client post Not Exists");
+		}
+		return clist;
+	}
+	
+	
+	@GetMapping("/get/clienpost/{id}")
+	public Optional<ClientPost> getClientPostById(@PathVariable("id") int id){
+		return clientPostService.getInfoById(id);
+		
 	}
 
 }

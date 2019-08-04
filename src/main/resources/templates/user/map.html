@@ -1,487 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
 <head>
-    <meta charset='utf-8' />
-    <title>Online Delivery</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    .built_address {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: white;
-        padding: 10px;
-        font-size: 12px;
-        font-family: Arial;
-         margin-left:83%;
-         margin-top: 7%;
-    }
-    </style>
-   
-</head>
-<body class="hold-transition skin-blue sidebar-mini">
-
-   <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-        <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
-        <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css' type='text/css' />
-
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
-
+<meta charset='utf-8' />
+<title>Online Delivery</title>
+<meta name='viewport'
+	content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script
+	src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+<link
+	href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css'
+	rel='stylesheet' />
 <style>
-#geocoder-container > div {
-position:fixed;
-    min-width:50%;
-    margin-left:25%;
-    margin-bottom: 25%;
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+.built_address {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: white;
+	padding: 10px;
+	font-size: 12px;
+	font-family: Arial;
+	margin-left: 83%;
+	margin-top: 7%;
 }
 </style>
 
-<div class="wrapper">
-
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Online</b>Delivery</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-         
-          <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
-          </li>
-      
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Online Delivery</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-          <p>Admin</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-          <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          <a href="index.html">
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-          </a>
-          
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Blog</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>All Blogs</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Add New Blog</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-map-o"></i>
-            <span>Service</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa-map"></i>All Services</a></li>
-            <li><a href="/service_post"><i class="fa fa-map-o"></i>Add New Service</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>User</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="t-user.html"><i class="fa fa-users"></i>All User</a></li>
-            <li><a href="f-user.html"><i class="fa fa-user-plus"></i>Add New User</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Blog</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>All Blogs</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Add New Blog</a></li>
-          </ul>
-        </li>
-        
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content">
-  <div id='map'></div>
-  <div class="built_address"> <button type="submit" id="submitbtn" >Submit</button></div>
-  </section>
-</div>
- <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2019 <a href="#"> Online Delivery</a>.</strong> All rights
-    reserved.
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark" style="display: none;">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-
-  <script>
+</head>
 
 
-  var built_address1 = '';
-  var built_address2 ='';
-  var place1 = '';
-  var place2 ='';
-  var user_coordinates;
-  var geocode_results;
+<script
+	src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script
+	src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+<link rel='stylesheet'
+	href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css'
+	type='text/css' />
+
+<script
+	src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet'
+	href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css'
+	type='text/css' />
 
 
-  mapboxgl.accessToken = 'pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw';
-  var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: {lat: 27.702983735525862 , lng: 85.31982421875},
-      zoom: 15
-  });
+<script
+	src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
+<link rel='stylesheet'
+	href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css'
+	type='text/css' />
 
-  var geocoder1 = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
+<style>
+#geocoder-container>div {
+	position: fixed;
+	min-width: 50%;
+	margin-left: 25%;
+	margin-bottom: 25%;
+}
+</style>
+<th:block th:include="admin/dashboardfragement/dhead :: dheads"></th:block>
+<body class="hold-transition skin-blue sidebar-mini">
+	<th:block th:include="admin/dashboardfragement/mapsidebar :: mapdiv"></th:block>
+
+
+	
+		<div id='map'></div>
+		<div class="built_address">
+			<button type="submit" id="submitbtn">Submit</button>
+		</div>
+
+	<th:block th:include="admin/dashboardfragement/dscript :: dscripts"></th:block>
+</body>
+<th:block th:include="admin/dashboardfragement/footer :: foot"></th:block>
+
+<script>
+
+
+	var built_address1 = '';
+	var built_address2 ='';
+	var place1 = '';
+	var place2 ='';
+	var user_coordinates;
+	var geocode_results;
+
+
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw';
+	var map = new mapboxgl.Map({
+	    container: 'map',
+	    style: 'mapbox://styles/mapbox/streets-v11',
+	    center: {lat: 27.702983735525862 , lng: 85.31982421875},
+	    zoom: 15
+	});
+
+	var geocoder1 = new MapboxGeocoder({
+	    accessToken: mapboxgl.accessToken,
   marker: {
         color: 'orange',
         draggable:false,
     },
     placeholder: "Origin location",mapboxgl: mapboxgl
-  });
-  var geocoder2 = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
+	});
+	var geocoder2 = new MapboxGeocoder({
+	    accessToken: mapboxgl.accessToken,
   marker: {
         color: 'orange',
         draggable:false,
     },
     placeholder: "Destination location",
 mapboxgl: mapboxgl
-  });
+	});
  
 map.addControl(geocoder1);
  
@@ -490,119 +128,119 @@ map.addControl(geocoder2);
 
   
 
-  // After the map style has loaded on the page, add a source layer and default
-  // styling for a single point.
-  map.on('load', function() {
-      map.addSource('single-point', {
-          "type": "geojson",
-          "data": {
-              "type": "FeatureCollection",
-              "features": []
-          }
-      });
+	// After the map style has loaded on the page, add a source layer and default
+	// styling for a single point.
+	map.on('load', function() {
+	    map.addSource('single-point', {
+	        "type": "geojson",
+	        "data": {
+	            "type": "FeatureCollection",
+	            "features": []
+	        }
+	    });
 
 
-      map.addLayer({
-          "id": "point",
-          "source": "single-point",
-          "type": "circle",
-          "paint": {
-              "circle-radius": 10,
-              "circle-color": "#007cbf"
-          }
-      });
+	    map.addLayer({
+	        "id": "point",
+	        "source": "single-point",
+	        "type": "circle",
+	        "paint": {
+	            "circle-radius": 10,
+	            "circle-color": "#007cbf"
+	        }
+	    });
    
 
-      getUserLocation();
+	    getUserLocation();
 
-  });
+	});
 
     if (typeof(Number.prototype.toRad) === 'undefined') { 
-      Number.prototype.toRad = function() {
-        return this * Math.PI / 180;     
-        } 
+    	Number.prototype.toRad = function() {
+    		return this * Math.PI / 180;     
+    		} 
     }
 
 
-  function getUserLocation() {
+	function getUserLocation() {
 
-    // request to allow user position 
-      if (navigator.geolocation) {
+		// request to allow user position 
+	    if (navigator.geolocation) {
 
-          navigator.geolocation.getCurrentPosition(showPosition);
-      function showPosition(position) {
+	        navigator.geolocation.getCurrentPosition(showPosition);
+			function showPosition(position) {
 
-        // get user current coordinates and center map on coordiates
-        console.log('L2', position)
-        //console.log(position.coords.latitude, position.coords.latitude)
-              user_coordinates = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-              };
+				// get user current coordinates and center map on coordiates
+				console.log('L2', position)
+				//console.log(position.coords.latitude, position.coords.latitude)
+	            user_coordinates = {
+	              lat: position.coords.latitude,
+	              lng: position.coords.longitude
+	            };
   
 
-        // draw user location on mao
-        map.getSource('single-point').setData({type: "Point", coordinates: [user_coordinates.lng,user_coordinates.lat]});
-    console.log("geocoder1",geocoder1.mapboxClient);
+				// draw user location on mao
+				map.getSource('single-point').setData({type: "Point", coordinates: [user_coordinates.lng,user_coordinates.lat]});
+  	console.log("geocoder1",geocoder1.mapboxClient);
                 geocoder1.mapboxClient
   .geocodeReverse({
 
     latitude: user_coordinates.lat, 
     longitude: user_coordinates.lng
   }, function(err, res) {
-    
+    console.log(err, res)
   });
 
-          // Listen for the `result` event from the MapboxGeocoder that is triggered when a user
-          // makes a selection and add a symbol that matches the result.
-          geocoder1.on('result', function(ev) {
-              map.getSource('single-point').setData(ev.result.geometry);
-              console.log('ev',ev)
-              built_address1 = ev.result.center;
-              place1 = ev.result.text;
+			    // Listen for the result event from the MapboxGeocoder that is triggered when a user
+			    // makes a selection and add a symbol that matches the result.
+			    geocoder1.on('result', function(ev) {
+			        map.getSource('single-point').setData(ev.result.geometry);
+			        console.log('ev',ev)
+			        built_address1 = ev.result.center;
+			        place1 = ev.result.text;
 
-          });
-                        geocoder2.mapboxClient
+			    });
+			                  geocoder2.mapboxClient
   .geocodeReverse({
     latitude: user_coordinates.lat, 
     longitude: user_coordinates.lng
   }, function(err, res) {
-
+    console.log(err, res)
   });
    geocoder2.on('result', function(ev) {
-              map.getSource('single-point').setData(ev.result.geometry);
-              console.log('ev',ev)
-              built_address2 = ev.result.center;
-              place2 = ev.result.text;
+			        map.getSource('single-point').setData(ev.result.geometry);
+			        console.log('ev',ev)
+			        built_address2 = ev.result.center;
+			        place2 = ev.result.text;
 
-          });
+			    });
 
-      }
-      } else {
-        // if device doesnt support location
-        console.log('device doesnt support location')
-      }
+			}
+	    } else {
+	    	// if device doesnt support location
+	    	console.log('device doesnt support location')
+	    }
 
-  }; /* END getUserLocation(); */
+	}; /* END getUserLocation(); */
 
   $(document).ready(function(){
-    var origin;
-    var destination;
-    var distance;
-    $("#submitbtn").click(function(e){
-      
+	  var origin;
+	  var destination;
+	  var distance;
+  	$("#submitbtn").click(function(e){
+  		
   console.log("here");
-    console.log("address",built_address2);
-    let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+  	console.log("address",built_address2);
+  	let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
             localStorage.setItem('items', JSON.stringify(itemsArray))
             const data = JSON.parse(localStorage.getItem('items'))
 
             var items={};
 
-          origin =built_address1;
-          destination = built_address2;
-            source = place1;
-            drop=place2;
+         	origin =built_address1;
+         	destination = built_address2;
+          	source = place1;
+          	drop=place2;
 
            items.origin= origin;
            items.destination= destination;
@@ -610,27 +248,79 @@ map.addControl(geocoder2);
 
             itemsArray.push(items);
             localStorage.setItem('items', JSON.stringify(itemsArray));
-
             console.log("lng",origin);
-
-          
+          var radiuses=25;
 
               // var query = 'https://api.mapbox.com/matching/v5/mapbox/' + profile + '/' + coordinates + '?geometries=geojson&radiuses=' + radiuses + '&steps=true&access_token=' + mapboxgl.accessToken;
-              var query= 'https://api.mapbox.com/directions/v5/mapbox/driving/'+origin[0]+','+origin[1]+';'+destination[0]+','+destination[1]+'.json?access_token=pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw&steps=true&alternatives=true&geometries=geojson';
-         
+              var query1= 'https://api.mapbox.com/directions/v5/mapbox/driving/'+origin[0]+','+origin[1]+';'+destination[0]+','+destination[1]+'.json?access_token=pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw&steps=true&alternatives=true&geometries=geojson';
+       
+              var query2 = 'https://api.mapbox.com/matching/v5/mapbox/driving/'+origin[0]+','+origin[1]+';'+destination[0]+','+destination[1]+ '?geometries=geojson&radiuses=' + radiuses+';'+radiuses + '&steps=true&access_token=' + mapboxgl.accessToken;
+              $.ajax({
+                  method: 'GET',
+                  url: query2
+                }).done(function(data) {
+                  // Get the coordinates from the response
+                  var coords = data.matchings[0].geometry;
+                  // Draw the route on the map
+                  addRoute(coords);
+                 /*  getInstructions(data.matchings[0]); */
+                });
+              function addRoute(coords) {
+                  // If a route is already loaded, remove it
+                  if (map.getSource('route')) {
+                    map.removeLayer('route')
+                    map.removeSource('route')
+                  } else {
+                    map.addLayer({
+                      "id": "route",
+                      "type": "line",
+                      "source": {
+                        "type": "geojson",
+                        "data": {
+                          "type": "Feature",
+                          "properties": {},
+                          "geometry": coords
+                        }
+                      },
+                      "layout": {
+                        "line-join": "round",
+                        "line-cap": "round"
+                      },
+                      "paint": {
+                        "line-color": "#03AA46",
+                        "line-width": 8,
+                        "line-opacity": 0.8
+                      }
+                    });
+                  };
+                }
 
+              /*   function getInstructions(data) {
+                  // Target the sidebar to add the instructions
+                  var directions = document.getElementById('directions');
+
+                  var legs = data.legs;
+                  var tripDirections = [];
+                  // Output the instructions for each step of each leg in the response object
+                  for (var i = 0; i < legs.length; i++) {
+                    var steps = legs[i].steps;
+                    for (var j = 0; j < steps.length; j++) {
+                      tripDirections.push('<br><li>' + steps[j].maneuver.instruction) + '</li>';
+                    }
+                  }
+                  directions.innerHTML = '<br><h2>Trip duration: ' + Math.floor(data.duration / 60) + ' min.</h2>' + tripDirections;
+                } */
+              
       $.ajax({
         method: 'GET',
-        url: query
+        url: query1
       }).done(function(data) {
         // Get the coordinates from the response
         // var coords = data.matchings[0].geometry;
         // Draw the route on the map
-
         console.log("coords",data);
         distance=data.routes[0].distance;
 console.log("distance",distance);
-
         // addRoute(coords);
         // getInstructions(data.matchings[0]);
 e.preventDefault();
@@ -639,9 +329,9 @@ saveClientPostInfo();
       });
     
   });
-    function calculateDistance(){
-       var lat1=parseFloat(origin[1]);           
-       var lat2=parseFloat(destination[1]); 
+  	function calculateDistance(){
+  	   var lat1=parseFloat(origin[1]);           
+  	   var lat2=parseFloat(destination[1]); 
        var lon1=parseFloat(origin[0]);           
        var lon2=parseFloat(destination[0]);           
        var R = 6371e3; // metres           
@@ -656,35 +346,35 @@ saveClientPostInfo();
        var d = (R * c)/1000; 
 
 console.log("dis",d);  
-      
-    }
-    function saveClientPostInfo(){
+  		
+  	}
+  	function saveClientPostInfo(){
  
-      var formData={
-          
-          source:source,
-        destination:drop,
-      distances:distance
-      
-      
-      }
-      console.log(formData) 
-      $.ajax({
-        type:"POST",
-        contentType:"application/json",
-        url:"/save/clientpost",
-        data:JSON.stringify(formData),
-        success:function(response){
-          console.log("response",response);
-        }
-      })
+  		var formData={
+  				
+  				source:source,
+  			destination:drop,
+  		distances:distance
+  		
+  		
+  		}
+  		console.log(formData) 
+  		$.ajax({
+  			type:"POST",
+  			contentType:"application/json",
+  			url:"/save/clientpost",
+  			data:JSON.stringify(formData),
+  			success:function(response){
+  				console.log("response",response);
+  			}
+  		})
  
-    }   
-    
+  	}		
+  	
   });
-    
+  	
 
-  </script>
+	</script>
 
 </body>
 </html>

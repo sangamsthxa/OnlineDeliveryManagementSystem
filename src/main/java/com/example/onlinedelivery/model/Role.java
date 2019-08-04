@@ -21,10 +21,8 @@ public class Role {
 
 	private String roleName;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "roles")
-//    private Set<User> users;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "roles")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roles")
 	private Set<User> users = new HashSet<>();
 
 	public Long getId() {

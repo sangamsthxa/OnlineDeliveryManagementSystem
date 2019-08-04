@@ -49,7 +49,6 @@ public class DeliveryService extends AuditModel {
 	@ToString.Exclude
 //	private Client client;
 	@OneToMany( mappedBy="service",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-//	@JoinColumn(name="vehicle_id")
 	private List<VehicleType> vehicleType;
 	
 

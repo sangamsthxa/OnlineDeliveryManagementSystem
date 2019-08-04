@@ -26,14 +26,13 @@ public class ClientPostServiceImpl  implements GenericService<ClientPost> {
 
 	@Override
 	public ClientPost updateInfo(ClientPost t) {
-		// TODO Auto-generated method stub
-		return null;
+		return clientPostRepository.save(t);
 	}
 
 	@Override
 	public boolean deleteById(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		clientPostRepository.deleteById(id);
+		return true;
 	}
 
 	@Override
@@ -43,8 +42,7 @@ public class ClientPostServiceImpl  implements GenericService<ClientPost> {
 
 	@Override
 	public Optional<ClientPost> getInfoById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	return clientPostRepository.findById(id);
 	}
 
 }

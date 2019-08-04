@@ -39,7 +39,7 @@ public class HomeController {
 	@RequestMapping({ "/admin/dashboard" })
 	public String getAdminDashboard(Model model) {
 		model.addAttribute("index", "item");
-	    model.addAttribute("clienthomepage", "nav-item active");
+	    model.addAttribute("clienthomepage", "nav-item ");
 		model.addAttribute("aboutUs","nav-item");
 		model.addAttribute("services","nav-item");
 		model.addAttribute("dashboard", "nav-item active");

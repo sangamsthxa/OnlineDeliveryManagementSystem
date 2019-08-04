@@ -33,9 +33,7 @@ public class Notification extends AuditModel {
 	@JoinColumn(name="service_id")
 	private DeliveryService service;
 	
-//	private Vendor vendor;
-	
-//	private Client client;
+
 	
 
 }
