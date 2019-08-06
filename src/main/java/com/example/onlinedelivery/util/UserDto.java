@@ -1,14 +1,12 @@
 package com.example.onlinedelivery.util;
 
-public class UserDto {
+import java.util.Date;
 
-	private String userRole;
+public class UserDto {
 	
-	private String username;
+	private String userName;
 
 	private String password;
-
-	private String passwordConfirm;
 
 	private String firstName;
 
@@ -23,21 +21,48 @@ public class UserDto {
 	private String contactNo;
 
 	private String gender;
+	
+	private String roleName;
+	
+	private String createdBy;
+	
+	private Date createdAt;
+	
+	private Date updatedAt;
+	
+	
+	
 
-	public String getUserRole() {
-		return userRole;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
-	public String getUsername() {
-		return username;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPassword() {
@@ -46,14 +71,6 @@ public class UserDto {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getPasswordConfirm() {
-		return passwordConfirm;
-	}
-
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
 	}
 
 	public String getFirstName() {
@@ -112,11 +129,23 @@ public class UserDto {
 		this.gender = gender;
 	}
 
+	public String getRoleName() {
+		return roleName;
+	}
 
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
-
-
+	@Override
+	public String toString() {
+		return "UserDto [userName=" + userName + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", email=" + email + ", address=" + address + ", dob=" + dob + ", contactNo=" + contactNo
+				+ ", gender=" + gender + ", roleName=" + roleName + "]";
+	}
 	
 	
-
+	
+	
+	
 }

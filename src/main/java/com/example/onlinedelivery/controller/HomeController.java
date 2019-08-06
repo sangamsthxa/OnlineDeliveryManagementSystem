@@ -1,96 +1,63 @@
 package com.example.onlinedelivery.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.onlinedelivery.model.User;
+import com.example.onlinedelivery.repositories.BlogRepository;
+import com.example.onlinedelivery.repositories.ClientPostRepository;
+import com.example.onlinedelivery.repositories.UserRepository;
+
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private ClientPostRepository clientPostRepository;
+	
+	@Autowired
+	private BlogRepository blogRepository;
 
 	@RequestMapping({ "/", "/home" })
 	public String getHomePage(Model model) {
-		model.addAttribute("index", "item");
 		return "index";
 	}
 
-	@RequestMapping({ "/client" })
-	public String getClientHomePage(Model model) {
-		model.addAttribute("index", "item");
-		model.addAttribute("clienthomepage", "nav-item active");
-		return "client/clienthomepage";
-	}
 	@RequestMapping({ "/aboutUs" })
 	public String getAboutUs(Model model) {
-		model.addAttribute("index", "item");
-		model.addAttribute("clienthomepage", "nav-item active");
-		model.addAttribute("aboutUs","nav-item");
-		return "user/aboutUs";
+		return "aboutUs";
 	}
-	
+
 	@RequestMapping({ "/services" })
 	public String getServices(Model model) {
-		model.addAttribute("index", "item");
-		model.addAttribute("clienthomepage", "nav-item active");
-		model.addAttribute("aboutUs","nav-item");
-		model.addAttribute("services","nav-item");
-		
-		return "user/services";
+		return "services";
 	}
-	@RequestMapping({ "/admin/dashboard" })
+
+	@RequestMapping({ "/dashboard" })
 	public String getAdminDashboard(Model model) {
-		model.addAttribute("index", "item");
-	    model.addAttribute("clienthomepage", "nav-item ");
-		model.addAttribute("aboutUs","nav-item");
-		model.addAttribute("services","nav-item");
-		model.addAttribute("dashboard", "nav-item active");
-		
+	   model.addAttribute("user", userRepository.count());
+	   model.addAttribute("tservices", clientPostRepository.count());
+	   model.addAttribute("blog", blogRepository.count());
 		return "admin/dashboard";
 	}
-	
-	@RequestMapping({ "/client/dashboard" })
-	public String getClientDashboard(Model model) {
-		model.addAttribute("index", "item");
-	    model.addAttribute("clienthomepage", "nav-item active");
-		model.addAttribute("aboutUs","nav-item");
-		model.addAttribute("services","nav-item");
-		model.addAttribute("dashboard", "nav-item active");
-		model.addAttribute("clientDashboard", "nav-item");
-		return "client/clientDashboard";
-	}
-	
+
 	@RequestMapping({ "/admin/map" })
 	public String getMapService(Model model) {
-		model.addAttribute("index", "item");
-	    model.addAttribute("clienthomepage", "nav-item active");
-		model.addAttribute("aboutUs","nav-item");
-		model.addAttribute("services","nav-item");
-		model.addAttribute("map", "nav-item");
-		
 		return "admin/locationservice/map";
 	}
-	@RequestMapping({ "/service_post" })
+
+	@RequestMapping({ "/client/service_post" })
 	public String postService(Model model) {
-		model.addAttribute("index", "item");
-	    model.addAttribute("clienthomepage", "nav-item active");
-		model.addAttribute("aboutUs","nav-item");
-		model.addAttribute("services","nav-item");
-		model.addAttribute("map", "nav-item");
-		model.addAttribute("service","nav-item");
-		
 		return "user/map";
 	}
-	@RequestMapping({ "/service_list" })
+
+	@RequestMapping({ "/admin/service_list" })
 	public String getService(Model model) {
-		model.addAttribute("index", "item");
-	    model.addAttribute("clienthomepage", "nav-item active");
-		model.addAttribute("aboutUs","nav-item");
-		model.addAttribute("services","nav-item");
-		model.addAttribute("map", "nav-item");
-		model.addAttribute("service","nav-item");
-		model.addAttribute("serviceList","nav-item");
 		return "user/formdata";
 	}
-	
-	
-	
+
 }

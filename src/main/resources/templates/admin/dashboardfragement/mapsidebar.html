@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -14,16 +16,18 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
+      <a href="/dashboard"> <strong>Dashboard</strong></a>
       <div class="user-panel">
         <div class="pull-left image">
           <img th:src="@{~/dist/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <p>Welcome User</p>
+          <a href="/dashboard"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
   
+      <!-- sidebar menu: : style can be found in sidebar.less -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
@@ -31,7 +35,7 @@
             <li><i class="fa fa-circle-o"></i> Dashboard</li>
        
 
-        <li class="treeview">
+        <li class="treeview" >
           <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Blog</span>
@@ -40,11 +44,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>All Blogs</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Add New Blog</a></li>
+            <li><a href="/blog"><i class="fa fa-circle-o"></i>All Blogs</a></li>
+            <li  ><a href="/admin/addBlog"><i class="fa fa-circle-o"></i>Add New Blog</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        
+        
+        
+        <li   class="treeview">
           <a href="#">
             <i class="fa fa-map-o"></i>
             <span>Service</span>
@@ -53,11 +60,15 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/service_list"><i class="fa-map"></i>All Services</a></li>
-            <li><a href="/service_post"><i class="fa fa-map-o"></i>Add New Service</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"><a  href="admin/service_list"><i class="fa-map"></i>All Services</a></li>
+            <li sec:authorize="hasRole('ROLE_CLIENT')"><a  href="/service_list"><i class="fa-map"></i>My Services</a></li>
+            <li sec:authorize="hasRole('ROLE_CLIENT')"><a href="/client/service_post"><i class="fa fa-map-o"></i>Add New Service</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        
+        
+        
+        <li sec:authorize="hasRole('ROLE_ADMIN')" class="treeview">
           <a href="#">
             <i class="fa fa-user"></i>
             <span>User</span>
@@ -66,21 +77,53 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="t-user.html"><i class="fa fa-users"></i>All User</a></li>
-            <li><a href="f-user.html"><i class="fa fa-user-plus"></i>Add New User</a></li>
+            <li><a href="/admin/viewUser"><i class="fa fa-users"></i>All User</a></li>
+            <li><a href="/admin/addUser"><i class="fa fa-user-plus"></i>Add New User</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        
+        
+        
+        <li sec:authorize="hasRole('ROLE_CLIENT')" class="treeview">
           <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Blog</span>
+            <i class="fa fa-user"></i>
+            <span>Client profile</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i>All Blogs</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Add New Blog</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>View Profile</a></li>
+          </ul>
+        </li>
+        
+        
+        
+           <li sec:authorize="hasRole('ROLE_VENDOR')" class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Vendor profile</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i>View Profile</a></li>
+          </ul>
+        </li>
+        
+        
+        
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-sign-out"></i>
+            <span>Logout</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/logout"><i class="fa fa-circle-o"></i>Logout </a></li>
           </ul>
         </li>
         
