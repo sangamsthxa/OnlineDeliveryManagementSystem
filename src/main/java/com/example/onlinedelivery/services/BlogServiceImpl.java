@@ -18,7 +18,7 @@ public class BlogServiceImpl implements GenericService<Blog>{
 	
 	@Override
 	public Blog saveInfo(Blog t) {
-		// TODO Auto-generated method stub
+	
 		return blogrepo.save(t);
 	}
 

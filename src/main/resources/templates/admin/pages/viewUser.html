@@ -1,0 +1,105 @@
+ 
+ <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Users</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	
+
+
+
+
+
+<style>
+}
+.container {
+	margin-top: 60px;
+}
+</style>
+<th:block th:include="admin/dashboardfragement/dhead :: dheads"></th:block>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+	<th:block th:include="admin/dashboardfragement/sidebar :: div"></th:block>
+ 
+ 
+ 
+ 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Users
+            <small>All User</small>
+          </h1>
+      <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">User</a></li>
+        <li class="active">All users</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">User Table</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="userList" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                <th width="15px;">#</th>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>Address</th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+             
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  
+  
+  
+     
+<th:block th:include="admin/dashboardfragement/dscript :: dscripts"></th:block>
+</body>
+<th:block th:replace="admin/dashboardfragement/footer :: foot"></th:block>
+
+   <script type="text/javascript" th:src="@{~/js/sweetalert2.all.js}"></script>
+
+<script th:src="@{~/js/jquery.dataTables.min.js}" type="text/javascript"></script>
+
+  <script type="text/javascript" th:src="@{~/custom/other/listUser.js}"></script>
+</html>

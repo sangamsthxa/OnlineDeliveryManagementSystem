@@ -29,8 +29,6 @@ public class ClientPost  extends AuditModel {
 	
 	@Column(name="short_distance" ,nullable= false)
 	private String distances;
-	
-//	@Column(name="client")
-//	private String client;
+
 
 }

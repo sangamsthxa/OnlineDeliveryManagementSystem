@@ -5,20 +5,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.onlinedelivery.model.User;
 import com.example.onlinedelivery.repositories.BlogRepository;
 import com.example.onlinedelivery.repositories.ClientPostRepository;
 import com.example.onlinedelivery.repositories.UserRepository;
 
 @Controller
 public class HomeController {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private ClientPostRepository clientPostRepository;
-	
+
 	@Autowired
 	private BlogRepository blogRepository;
 
@@ -39,9 +38,9 @@ public class HomeController {
 
 	@RequestMapping({ "/dashboard" })
 	public String getAdminDashboard(Model model) {
-	   model.addAttribute("user", userRepository.count());
-	   model.addAttribute("tservices", clientPostRepository.count());
-	   model.addAttribute("blog", blogRepository.count());
+		model.addAttribute("user", userRepository.count());
+		model.addAttribute("tservices", clientPostRepository.count());
+		model.addAttribute("blog", blogRepository.count());
 		return "admin/dashboard";
 	}
 
@@ -55,9 +54,39 @@ public class HomeController {
 		return "user/map";
 	}
 
-	@RequestMapping({ "/admin/service_list" })
+	@RequestMapping({ "/service_list" })
 	public String getService(Model model) {
 		return "user/formdata";
+	}
+
+	@RequestMapping({ "/admin/addUser" })
+	public String AddUserPage() {
+		return "admin/pages/addUser";
+	}
+
+	@RequestMapping({ "/admin/viewUser" })
+	public String ViewListUserPage() {
+		return "admin/pages/viewUser";
+	}
+
+	@RequestMapping("/admin/addBlog")
+	public String addBlog() {
+		return "admin/pages/addBlog";
+	}
+
+	@RequestMapping("/admin/viewBlog")
+	public String viewBlog() {
+		return "admin/pages/viewBlog";
+	}
+
+	@RequestMapping("/admin/viewAboutUs")
+	public String viewAboutUs() {
+		return "admin/pages/viewAboutUs";
+	}
+
+	@RequestMapping("/admin/addAboutUs")
+	public String addAboutUs() {
+		return "admin/pages/addAboutUs";
 	}
 
 }

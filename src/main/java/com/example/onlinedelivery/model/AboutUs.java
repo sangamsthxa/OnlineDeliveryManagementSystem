@@ -12,16 +12,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name= "about_us")
+@Table(name = "about_us")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class AboutUs extends AuditModel{
+public class AboutUs extends AuditModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(name="title", nullable=false)
+
+	@Column(name = "title", nullable = false)
 	private String title;
-	@Column(name="description", nullable=false)
+
+	@Column(name = "description", nullable = false)
 	@Lob
 	private String description;
 

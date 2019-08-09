@@ -7,14 +7,16 @@
 <meta name='viewport'
 	content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script
-	src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.js'></script>
+	src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.js'></script>
+
 <link
-	href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.49.0/mapbox-gl.css'
+	href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.0/mapbox-gl.css'
 	rel='stylesheet' />
 <style>
 body {
 	margin: 0;
 	padding: 0;
+	g
 }
 
 #map {
@@ -38,29 +40,6 @@ body {
 </style>
 
 </head>
-
-
-<script
-	src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-<script
-	src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
-<link rel='stylesheet'
-	href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css'
-	type='text/css' />
-
-<script
-	src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet'
-	href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css'
-	type='text/css' />
-
-
-<script
-	src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
-<link rel='stylesheet'
-	href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css'
-	type='text/css' />
-
 <style>
 #geocoder-container>div {
 	position: fixed;
@@ -68,313 +47,415 @@ body {
 	margin-left: 25%;
 	margin-bottom: 25%;
 }
+
+.bo {
+	position: absolute;
+	width: 15%;
+	top: 25%;
+	right: 0%;
+	bottom: 40%;
+	padding: 20px;
+	background-color: rgba(255, 255, 255, 0.9);
+	overflow-y: scroll;
+	font-family: sans-serif;
+	font-size: 0.8em;
+	line-height: 2em;
+}
+
+#info {
+	font-size: 16px;
+	font-weight: bold;
+}
 </style>
 <th:block th:include="admin/dashboardfragement/dhead :: dheads"></th:block>
 <body class="hold-transition skin-blue sidebar-mini">
+
+
+	<script
+		src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<script
+		src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.js'></script>
+	<link rel='stylesheet'
+		href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.0/mapbox-gl-directions.css'
+		type='text/css' />
+
+	<script
+		src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+	<link rel='stylesheet'
+		href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css'
+		type='text/css' />
+	<script
+		src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
+	<link rel='stylesheet'
+		href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css'
+		type='text/css' />
+	
 	<th:block th:include="admin/dashboardfragement/mapsidebar :: mapdiv"></th:block>
 
 
-	
-		<div id='map'></div>
-		<div class="built_address">
-			<button type="submit" id="submitbtn">Submit</button>
+
+	<div id='map'></div>
+	<div class="built_address">
+		<button type="submit" id="submitbtn">Submit</button>
+	</div>
+	<div class="bo">
+		<div id="info">
+			<p>Shotest path nodes</p>
 		</div>
+		<div id="directions"></div>
+	</div>
 
 	<th:block th:include="admin/dashboardfragement/dscript :: dscripts"></th:block>
 </body>
 <th:block th:include="admin/dashboardfragement/footer :: foot"></th:block>
 
 <script>
-
-
 	var built_address1 = '';
-	var built_address2 ='';
+	var built_address2 = '';
 	var place1 = '';
-	var place2 ='';
+	var place2 = '';
 	var user_coordinates;
 	var geocode_results;
 
-
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw';
+	mapboxgl.accessToken = 'pk.eyJ1Ijoic3RoYXNhbmdhbSIsImEiOiJjanowcGRybmUwZHdrM25sb3hpYncwZWVyIn0.bALAIQLRNejwSf8cDdIEDA';
 	var map = new mapboxgl.Map({
-	    container: 'map',
-	    style: 'mapbox://styles/mapbox/streets-v11',
-	    center: {lat: 27.702983735525862 , lng: 85.31982421875},
-	    zoom: 15
+		container : 'map',
+		style : 'mapbox://styles/mapbox/streets-v11',
+		center : {
+			lat : 27.702983735525862,
+			lng : 85.31982421875
+		},
+		zoom : 15
 	});
 
 	var geocoder1 = new MapboxGeocoder({
-	    accessToken: mapboxgl.accessToken,
-  marker: {
-        color: 'orange',
-        draggable:false,
-    },
-    placeholder: "Origin location",mapboxgl: mapboxgl
+		accessToken : mapboxgl.accessToken,
+		marker : {
+			color : 'orange',
+			draggable : false,
+		},
+		placeholder : "Origin location",
+		mapboxgl : mapboxgl
 	});
 	var geocoder2 = new MapboxGeocoder({
-	    accessToken: mapboxgl.accessToken,
-  marker: {
-        color: 'orange',
-        draggable:false,
-    },
-    placeholder: "Destination location",
-mapboxgl: mapboxgl
+		accessToken : mapboxgl.accessToken,
+		marker : {
+			color : 'orange',
+			draggable : false,
+		},
+		placeholder : "Destination location",
+		mapboxgl : mapboxgl
 	});
- 
-map.addControl(geocoder1);
- 
-map.addControl(geocoder2);
 
+	map.addControl(geocoder1);
 
-  
+	map.addControl(geocoder2);
 
 	// After the map style has loaded on the page, add a source layer and default
 	// styling for a single point.
 	map.on('load', function() {
-	    map.addSource('single-point', {
-	        "type": "geojson",
-	        "data": {
-	            "type": "FeatureCollection",
-	            "features": []
-	        }
-	    });
+		map.addSource('single-point', {
+			"type" : "geojson",
+			"data" : {
+				"type" : "FeatureCollection",
+				"features" : []
+			}
+		});
 
+		map.addLayer({
+			"id" : "point",
+			"source" : "single-point",
+			"type" : "circle",
+			"paint" : {
+				"circle-radius" : 10,
+				"circle-color" : "#007cbf"
+			}
+		});
 
-	    map.addLayer({
-	        "id": "point",
-	        "source": "single-point",
-	        "type": "circle",
-	        "paint": {
-	            "circle-radius": 10,
-	            "circle-color": "#007cbf"
-	        }
-	    });
-   
-
-	    getUserLocation();
+		getUserLocation();
 
 	});
 
-    if (typeof(Number.prototype.toRad) === 'undefined') { 
-    	Number.prototype.toRad = function() {
-    		return this * Math.PI / 180;     
-    		} 
-    }
-
+	if (typeof (Number.prototype.toRad) === 'undefined') {
+		Number.prototype.toRad = function() {
+			return this * Math.PI / 180;
+		}
+	}
 
 	function getUserLocation() {
 
 		// request to allow user position 
-	    if (navigator.geolocation) {
+		if (navigator.geolocation) {
 
-	        navigator.geolocation.getCurrentPosition(showPosition);
+			navigator.geolocation.getCurrentPosition(showPosition);
 			function showPosition(position) {
 
 				// get user current coordinates and center map on coordiates
 				console.log('L2', position)
 				//console.log(position.coords.latitude, position.coords.latitude)
-	            user_coordinates = {
-	              lat: position.coords.latitude,
-	              lng: position.coords.longitude
-	            };
-  
+				user_coordinates = {
+					lat : position.coords.latitude,
+					lng : position.coords.longitude
+				};
 
 				// draw user location on mao
-				map.getSource('single-point').setData({type: "Point", coordinates: [user_coordinates.lng,user_coordinates.lat]});
-  	console.log("geocoder1",geocoder1.mapboxClient);
-                geocoder1.mapboxClient
-  .geocodeReverse({
+				map.getSource('single-point').setData(
+						{
+							type : "Point",
+							coordinates : [ user_coordinates.lng,
+									user_coordinates.lat ]
+						});
+				console.log("geocoder1", geocoder1);
+				geocoder1.mapboxClient.geocodeReverse({
 
-    latitude: user_coordinates.lat, 
-    longitude: user_coordinates.lng
-  }, function(err, res) {
-    console.log(err, res)
-  });
+					latitude : user_coordinates.lat,
+					longitude : user_coordinates.lng
+				}, function(err, res) {
+					console.log(err, res)
+				});
 
-			    // Listen for the result event from the MapboxGeocoder that is triggered when a user
-			    // makes a selection and add a symbol that matches the result.
-			    geocoder1.on('result', function(ev) {
-			        map.getSource('single-point').setData(ev.result.geometry);
-			        console.log('ev',ev)
-			        built_address1 = ev.result.center;
-			        place1 = ev.result.text;
+				// Listen for the result event from the MapboxGeocoder that is triggered when a user
+				// makes a selection and add a symbol that matches the result.
+				geocoder1.on('result', function(ev) {
+					map.getSource('single-point').setData(ev.result.geometry);
+					console.log('ev', ev)
+					built_address1 = ev.result.center;
+					place1 = ev.result.text;
 
-			    });
-			                  geocoder2.mapboxClient
-  .geocodeReverse({
-    latitude: user_coordinates.lat, 
-    longitude: user_coordinates.lng
-  }, function(err, res) {
-    console.log(err, res)
-  });
-   geocoder2.on('result', function(ev) {
-			        map.getSource('single-point').setData(ev.result.geometry);
-			        console.log('ev',ev)
-			        built_address2 = ev.result.center;
-			        place2 = ev.result.text;
+				});
+				geocoder2.mapboxClient.geocodeReverse({
+					latitude : user_coordinates.lat,
+					longitude : user_coordinates.lng
+				}, function(err, res) {
+					console.log(err, res)
+				});
+				geocoder2.on('result', function(ev) {
+					map.getSource('single-point').setData(ev.result.geometry);
+					console.log('ev', ev)
+					built_address2 = ev.result.center;
+					place2 = ev.result.text;
 
-			    });
+				});
 
 			}
-	    } else {
-	    	// if device doesnt support location
-	    	console.log('device doesnt support location')
-	    }
+		} else {
+			// if device doesnt support location
+			console.log('device doesnt support location')
+		}
 
-	}; /* END getUserLocation(); */
+	};
 
-  $(document).ready(function(){
-	  var origin;
-	  var destination;
-	  var distance;
-  	$("#submitbtn").click(function(e){
-  		
-  console.log("here");
-  	console.log("address",built_address2);
-  	let itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
-            localStorage.setItem('items', JSON.stringify(itemsArray))
-            const data = JSON.parse(localStorage.getItem('items'))
+	$(document)
+			.ready(
+					function() {
+						var origin;
+						var destination;
+						var distance;
+						var nodes;
+						let g = new Graph();
+						$("#submitbtn")
+								.click(
+										function(e) {
 
-            var items={};
+											console.log("here");
+											console.log("address",
+													built_address2);
+											let itemsArray = localStorage
+													.getItem('items') ? JSON
+													.parse(localStorage
+															.getItem('items'))
+													: [];
+											localStorage.setItem('items', JSON
+													.stringify(itemsArray))
+											const data = JSON
+													.parse(localStorage
+															.getItem('items'))
 
-         	origin =built_address1;
-         	destination = built_address2;
-          	source = place1;
-          	drop=place2;
+											var items = {};
 
-           items.origin= origin;
-           items.destination= destination;
+											origin = built_address1;
+											destination = built_address2;
+											source = place1;
+											drop = place2;
 
+											items.origin = origin;
+											items.destination = destination;
 
-            itemsArray.push(items);
-            localStorage.setItem('items', JSON.stringify(itemsArray));
-            console.log("lng",origin);
-          var radiuses=25;
+											itemsArray.push(items);
+											localStorage.setItem('items', JSON
+													.stringify(itemsArray));
+											console.log("lng", origin);
+											var radiuses = 25;
 
-              // var query = 'https://api.mapbox.com/matching/v5/mapbox/' + profile + '/' + coordinates + '?geometries=geojson&radiuses=' + radiuses + '&steps=true&access_token=' + mapboxgl.accessToken;
-              var query1= 'https://api.mapbox.com/directions/v5/mapbox/driving/'+origin[0]+','+origin[1]+';'+destination[0]+','+destination[1]+'.json?access_token=pk.eyJ1IjoiZmFyaXNrYXNzaW0iLCJhIjoiSk1MaUthdyJ9.vkxtdDbYdLi524WwlKORBw&steps=true&alternatives=true&geometries=geojson';
-       
-              var query2 = 'https://api.mapbox.com/matching/v5/mapbox/driving/'+origin[0]+','+origin[1]+';'+destination[0]+','+destination[1]+ '?geometries=geojson&radiuses=' + radiuses+';'+radiuses + '&steps=true&access_token=' + mapboxgl.accessToken;
-              $.ajax({
-                  method: 'GET',
-                  url: query2
-                }).done(function(data) {
-                  // Get the coordinates from the response
-                  var coords = data.matchings[0].geometry;
-                  // Draw the route on the map
-                  addRoute(coords);
-                 /*  getInstructions(data.matchings[0]); */
-                });
-              function addRoute(coords) {
-                  // If a route is already loaded, remove it
-                  if (map.getSource('route')) {
-                    map.removeLayer('route')
-                    map.removeSource('route')
-                  } else {
-                    map.addLayer({
-                      "id": "route",
-                      "type": "line",
-                      "source": {
-                        "type": "geojson",
-                        "data": {
-                          "type": "Feature",
-                          "properties": {},
-                          "geometry": coords
-                        }
-                      },
-                      "layout": {
-                        "line-join": "round",
-                        "line-cap": "round"
-                      },
-                      "paint": {
-                        "line-color": "#03AA46",
-                        "line-width": 8,
-                        "line-opacity": 0.8
-                      }
-                    });
-                  };
-                }
+											// var query = 'https://api.mapbox.com/matching/v5/mapbox/' + profile + '/' + coordinates + '?geometries=geojson&radiuses=' + radiuses + '&steps=true&access_token=' + mapboxgl.accessToken;
+											var query1 = 'https://api.mapbox.com/directions/v5/mapbox/driving/'
+													+ origin[0]
+													+ ','
+													+ origin[1]
+													+ ';'
+													+ destination[0]
+													+ ','
+													+ destination[1]
+													+ '.json?access_token=pk.eyJ1Ijoic3RoYXNhbmdhbSIsImEiOiJjanowcGRybmUwZHdrM25sb3hpYncwZWVyIn0.bALAIQLRNejwSf8cDdIEDA&steps=true&alternatives=true&geometries=geojson';
+											console.log("query1", query1);
+											var query2 = 'https://api.mapbox.com/matching/v5/mapbox/driving/'
+													+ origin[0]
+													+ ','
+													+ origin[1]
+													+ ';'
+													+ destination[0]
+													+ ','
+													+ destination[1]
+													+ '?geometries=geojson&radiuses='
+													+ radiuses
+													+ ';'
+													+ radiuses
+													+ '&steps=true&access_token='
+													+ mapboxgl.accessToken;
+											$
+													.ajax({
+														method : 'GET',
+														url : query2
+													})
+													.done(
+															function(data) {
+																console.log(
+																		"data",
+																		data);
+																// Get the coordinates from the response
+																var coords = data.matchings[0].geometry;
+																console.log(
+																		"coor",
+																		coords);
+																// Draw the route on the map
+																addRoute(coords);
+																/*   getInstructions(data.matchings[0]); */
+															});
+											function addRoute(coords) {
+												// If a route is already loaded, remove it
+												if (map.getSource('route')) {
+													map.removeLayer('route')
+													map.removeSource('route')
+												} else {
+													map
+															.addLayer({
+																"id" : "route",
+																"type" : "line",
+																"source" : {
+																	"type" : "geojson",
+																	"data" : {
+																		"type" : "Feature",
+																		"properties" : {},
+																		"geometry" : coords
+																	}
+																},
+																"layout" : {
+																	"line-join" : "round",
+																	"line-cap" : "round"
+																},
+																"paint" : {
+																	"line-color" : "#03AA46",
+																	"line-width" : 8,
+																	"line-opacity" : 0.8
+																}
+															});
+												}
+												;
+											}
 
-              /*   function getInstructions(data) {
-                  // Target the sidebar to add the instructions
-                  var directions = document.getElementById('directions');
+											function getInstructions(data) {
+												// Target the sidebar to add the instructions
+												var directions = document
+														.getElementById('directions');
+												console.log("data", data);
+												var tripDirections = [];
 
-                  var legs = data.legs;
-                  var tripDirections = [];
-                  // Output the instructions for each step of each leg in the response object
-                  for (var i = 0; i < legs.length; i++) {
-                    var steps = legs[i].steps;
-                    for (var j = 0; j < steps.length; j++) {
-                      tripDirections.push('<br><li>' + steps[j].maneuver.instruction) + '</li>';
-                    }
-                  }
-                  directions.innerHTML = '<br><h2>Trip duration: ' + Math.floor(data.duration / 60) + ' min.</h2>' + tripDirections;
-                } */
-              
-      $.ajax({
-        method: 'GET',
-        url: query1
-      }).done(function(data) {
-        // Get the coordinates from the response
-        // var coords = data.matchings[0].geometry;
-        // Draw the route on the map
-        console.log("coords",data);
-        distance=data.routes[0].distance;
-console.log("distance",distance);
-        // addRoute(coords);
-        // getInstructions(data.matchings[0]);
-e.preventDefault();
-calculateDistance();
-saveClientPostInfo();
-      });
-    
-  });
-  	function calculateDistance(){
-  	   var lat1=parseFloat(origin[1]);           
-  	   var lat2=parseFloat(destination[1]); 
-       var lon1=parseFloat(origin[0]);           
-       var lon2=parseFloat(destination[0]);           
-       var R = 6371e3; // metres           
-       var φ1 = lat1.toRad();           
-       var φ2 = lat2.toRad();           
-       var Δφ = (lat2-lat1).toRad();           
-       var Δλ = (lon2-lon1).toRad(); 
-       
-       var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ/2) * Math.sin(Δλ/2);           
-       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+												/*         /*   var legs = data.legs;
+												       
+												          // Output the instructions for each step of each leg in the response object */
+												for (var i = 1; i < data.length; i++) {
 
-       var d = (R * c)/1000; 
+													/*      var steps = legs[i].steps; */
+													console.log("ll", data[i]);
+													tripDirections
+															.push(data[i]);
 
-console.log("dis",d);  
-  		
-  	}
-  	function saveClientPostInfo(){
- 
-  		var formData={
-  				
-  				source:source,
-  			destination:drop,
-  		distances:distance
-  		
-  		
-  		}
-  		console.log(formData) 
-  		$.ajax({
-  			type:"POST",
-  			contentType:"application/json",
-  			url:"/save/clientpost",
-  			data:JSON.stringify(formData),
-  			success:function(response){
-  				console.log("response",response);
-  			}
-  		})
- 
-  	}		
-  	
-  });
-  	
+												}
+												directions.innerHTML = tripDirections;
 
-	</script>
+											}
+
+											$
+													.ajax({
+														method : 'GET',
+														url : query1
+													})
+													.done(
+															function(data) {
+																// Get the coordinates from the response
+																// var coords = data.matchings[0].geometry;
+																// Draw the route on the map
+																console
+																		.log(
+																				"coords",
+																				data);
+																for (var i = 0; i < data.routes.length; i++) {
+
+																	for (var j = 0; j < data.routes[i].legs[0].steps.length; j++) {
+																		g
+																				.addNode(data.routes[i].legs[0].steps[j].name);
+																		if (j != data.routes[i].legs[0].steps.length - 1) {
+																			g
+																					.addDirectedEdge(
+																							data.routes[i].legs[0].steps[j].name,
+																							data.routes[i].legs[0].steps[j + 1].name,
+																							data.routes[i].legs[0].steps[j].distance);
+																		}
+																	}
+																}
+																distance = data.routes[0].distance;
+																console
+																		.log(
+																				"distance",
+																				distance);
+																// addRoute(coords);
+
+																e
+																		.preventDefault();
+																/* calculateDistance(); */
+																nodes = g
+																		.djikstraAlgorithm(data.routes[0].legs[0].steps[0].name);
+																getInstructions(nodes);
+																saveClientPostInfo();
+															});
+
+										});
+						function saveClientPostInfo() {
+
+							var formData = {
+
+								source : source,
+								destination : drop,
+								distances : distance
+
+							}
+							console.log(formData)
+							$.ajax({
+								type : "POST",
+								contentType : "application/json",
+								url : "/save/clientpost",
+								data : JSON.stringify(formData),
+								success : function(response) {
+									console.log("response", response);
+								}
+							})
+
+						}
+
+					});
+</script>
 
 </body>
+
+<script th:src="@{~/custom/dijkstra.js}"></script>
 </html>

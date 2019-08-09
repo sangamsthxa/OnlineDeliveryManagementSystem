@@ -2,12 +2,9 @@ package com.example.onlinedelivery.controller;
 
 import java.security.Principal;
 import java.util.Date;
-
-import javax.validation.Valid;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,8 +12,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.onlinedelivery.model.User;
+import com.example.onlinedelivery.repositories.UserRepository;
 import com.example.onlinedelivery.security.service.UserService;
 import com.example.onlinedelivery.util.UserDto;
 
@@ -24,6 +24,9 @@ import com.example.onlinedelivery.util.UserDto;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@GetMapping("/access")
 	public String accessDenied() {
@@ -39,7 +42,7 @@ public class UserController {
 
 	@CrossOrigin(origins = "http://localhost:8888")
 	@PostMapping("/registration")
-	public String registration(@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult, Principal principal) {
+	public String registration(@RequestBody@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult, Principal principal) {
 
 		System.out.println(userForm);
 		userForm.setCreatedBy(principal.getName());
@@ -49,6 +52,26 @@ public class UserController {
 
 		return "login";
 
+	}
+	
+	@CrossOrigin(origins = "http://localhost:8888")
+	@PostMapping("/admin/registration")
+	public String adminRegistration(@ModelAttribute("saveUser") UserDto saveUser, BindingResult bindingResult, Principal principal) {
+
+		System.out.println(saveUser);
+		saveUser.setCreatedBy(principal.getName());
+		saveUser.setCreatedAt(new Date());
+		saveUser.setUpdatedAt(new Date());
+		userService.registerUser(saveUser);
+
+		return "admin/pages/addUser";
+
+	}
+	
+	@GetMapping("/list/users")
+	@ResponseBody
+	public List<User> getUserList() {
+		return userRepository.findAll();
 	}
 
 	@GetMapping("/login")

@@ -1,7 +1,6 @@
 $(document).ready(function(){
-	$('.reg').click(function(){
 	console.log("hello");
-	$("#userForm") .bootstrapValidator({
+	$("#saveUser") .bootstrapValidator({
 		  feedbackIcons: {
 			  valid: "far fa-check-circle fa-lg",
 		        invalid: "far fa-times-circle fa-lg",
@@ -69,16 +68,10 @@ $(document).ready(function(){
          });
 	
 
-		
-		
-
-	
-
 	function addUserInfo(){
 		var formData ={
 				username:$("#username").val(),
 				password:$("#password").val(),
-				passwordConfirm:$("#passwordConfirm").val(),
 				firstName:$("#firstName").val(),
 				lastName:$("#lastName").val(),
 				email:$("#email").val(),
@@ -91,14 +84,14 @@ $(document).ready(function(){
 		console.log(formData)
 		$.ajax({
 			type : "POST",
-            url : "/registration",
+            url : "/admin/registration",
             contentType:"application/json",
             data : JSON.stringify(formData),
             success : function(result) {
             	console.log(result)
             	if(result.status == true && result.statusCode ==200){
             		
-            		Swal.fire("User Information saved Successfully");
+            	Swal.fire("User Information saved Successfully");
             		location.reload();
             	}
             },
@@ -107,7 +100,7 @@ $(document).ready(function(){
             	if(error.responseJSON.status == false && error.responseJSON.statusCode ==400){
             		$("span#email").hide();
             		$("span#contactNo").hide();
-            		Swal.fire("Error saving User");
+            		Swal.fire("Error during saving");
             	}
             	if(error.responseJSON.status == false && error.responseJSON.statusCode == 600){
             		console.log(error.responseJSON.errors.Error)
@@ -120,12 +113,14 @@ $(document).ready(function(){
             			$("span#contactNo").show();
                 		$("span#contactNo").html(error.responseJSON.errors.contactNo)
             		}
-            		Swal.fire("Error saving User");
+            	
+            			Swal.fire("Error during saving");
+            	
             	}
             }
 		})
 	}
 	
 	
-	})
+	
 })

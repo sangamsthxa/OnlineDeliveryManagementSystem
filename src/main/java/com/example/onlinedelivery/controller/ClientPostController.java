@@ -45,6 +45,7 @@ public class ClientPostController {
 	
 	
 	@GetMapping("/get/clienpost/{id}")
+	@ResponseBody
 	public Optional<ClientPost> getClientPostById(@PathVariable("id") int id){
 		return clientPostService.getInfoById(id);
 		

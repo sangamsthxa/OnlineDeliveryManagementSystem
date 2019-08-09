@@ -2,7 +2,7 @@
 <html xmlns:th="https://www.thymeleaf.org/">
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Blog</title>
+<title>Add About us Content</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.2/css/bootstrapValidator.min.css"/>
@@ -33,11 +33,11 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Add Blog <small>Control panel</small>
+				Add About us Content<small>Control panel</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-				<li class="active">Add blog</li>
+				<li class="active">Add About us Content</li>
 			</ol>
 		</section>
 		<section class="content">
@@ -47,30 +47,31 @@
 					<!-- general form elements -->
 					<div class="box box-primary">
 						<div class="box-header with-border">
-							<h3 class="box-title">Add New Blog</h3>
+							<h3 class="box-title">Add New About us Content</h3>
 						</div>
 						<!-- /.box-header -->
 						<!-- form start -->
-						<form  th:action="@{/admin/save/blog}"   method="POST">
+						<form  th:action="@{/admin/save/about}"   method="POST">
 							<div class="box-body">
 								<div class="form-group col-md-6">
-									<label for="title">Title of Blog</label> <input type="text"
+									<label for="title">About Us Title</label> <input type="text"
 										class="form-control" id="title" name="title"
 										placeholder="Enter Blog's Title" required>
 								</div>
+							
+							</div><br>
+							<div class="box-body">
 								<div class="form-group col-md-6">
-									<label for="description">Blog Description</label> <input type="text"
+									<label for="description">AboutUs Description</label> <input type="text"
 										class="form-control" id="description" name="description"
 										placeholder="Enter Description" required>
 								</div>
-								
-
-							</div>
+								</div>
 
 							<!-- /.box-body -->
 
 							<div class="box-footer">
-								<button type="submit" class="btn btn-primary align-center" id="blog">Submit</button>
+								<button type="submit" class="btn btn-primary align-center" id="abt">Submit</button>
 							</div>
 						</form>
 					</div>
@@ -95,5 +96,5 @@
    <script type="text/javascript" th:src="@{~/js/sweetalert2.all.js}"></script>
 
 
-  <script type="text/javascript" th:src="@{~/custom/other/saveBlog.js}"></script>
+  <script type="text/javascript" th:src="@{~/custom/other/saveAboutus.js}"></script>
 </html>
