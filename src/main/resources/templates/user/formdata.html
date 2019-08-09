@@ -44,9 +44,12 @@
 											<tr>
 											
 												<th width="15px;">#</th>
+												<th>User</th>
 												<th>Source Location</th>
 												<th>Destination Location</th>
 												<th>Distance</th>
+												<th>Status</th>
+												
 										
 											</tr>
 										</thead>
@@ -68,6 +71,7 @@
 <th:block th:include="admin/dashboardfragement/dscript :: dscripts"></th:block>
 </body>
 <th:block th:replace="admin/dashboardfragement/footer :: foot"></th:block>
+<script type="text/javascript" th:src="@{~/js/sweetalert.min.js}"></script>
 
 <script th:src="@{~/js/jquery.dataTables.min.js}" type="text/javascript"></script>
 

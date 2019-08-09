@@ -21,6 +21,7 @@ public class ClientPostServiceImpl  implements GenericService<ClientPost> {
 
 	@Override
 	public ClientPost saveInfo(ClientPost t) {
+	    t.setEnable(true);
 		return clientPostRepository.save(t);
 	}
 

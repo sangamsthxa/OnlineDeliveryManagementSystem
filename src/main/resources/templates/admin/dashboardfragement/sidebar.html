@@ -93,15 +93,15 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li sec:authorize="hasRole('ROLE_ADMIN')"><a  href="/admin/service_list"><i class="fa-map"></i>All Services</a></li>
+            <li><a  href="/service_list"><i class="fa-map"></i>All Services</a></li>
             <li sec:authorize="hasRole('ROLE_CLIENT')"><a  href="/service_list"><i class="fa-map"></i>My Services</a></li>
-            <li sec:authorize="hasRole('ROLE_CLIENT')"><a href="/client/service_post"><i class="fa fa-map-o"></i>Add New Service</a></li>
+            <li sec:authorize="hasRole('ROLE_CLIENT')"><a href="/service_post"><i class="fa fa-map-o"></i>Add New Service</a></li>
           </ul>
         </li>
         
         
         
-        <li sec:authorize="hasRole('ROLE_ADMIN')" class="treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i>
             <span>User</span>
@@ -110,8 +110,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-          <li><a href="/admin/addUser"><i class="fa fa-user-plus"></i>Add New User</a></li>
-            <li><a href="/admin/viewUser"><i class="fa fa-users"></i>All User</a></li>
+          <li  sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin/addUser"><i class="fa fa-user-plus"></i>Add New User</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN' + 'ROLE_VENDOR')"> <a href="/viewUser"><i class="fa fa-users"></i>All User</a></li>
             
           </ul>
         </li>

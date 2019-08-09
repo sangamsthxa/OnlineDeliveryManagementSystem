@@ -40,7 +40,7 @@ public class UserController {
 		return "registration";
 	}
 
-	@CrossOrigin(origins = "http://localhost:8888")
+	@CrossOrigin(origins = "http://localhost:1111")
 	@PostMapping("/registration")
 	public String registration(@RequestBody@ModelAttribute("userForm") UserDto userForm, BindingResult bindingResult, Principal principal) {
 
@@ -54,7 +54,7 @@ public class UserController {
 
 	}
 	
-	@CrossOrigin(origins = "http://localhost:8888")
+	@CrossOrigin(origins = "http://localhost:1111")
 	@PostMapping("/admin/registration")
 	public String adminRegistration(@ModelAttribute("saveUser") UserDto saveUser, BindingResult bindingResult, Principal principal) {
 

@@ -49,7 +49,7 @@ public class HomeController {
 		return "admin/locationservice/map";
 	}
 
-	@RequestMapping({ "/client/service_post" })
+	@RequestMapping({ "/service_post" })
 	public String postService(Model model) {
 		return "user/map";
 	}
@@ -64,7 +64,7 @@ public class HomeController {
 		return "admin/pages/addUser";
 	}
 
-	@RequestMapping({ "/admin/viewUser" })
+	@RequestMapping({ "/viewUser" })
 	public String ViewListUserPage() {
 		return "admin/pages/viewUser";
 	}
