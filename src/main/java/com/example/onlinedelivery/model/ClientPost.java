@@ -32,7 +32,15 @@ public class ClientPost  extends AuditModel {
 	
 	@Column(name="status")
 	private boolean enable;
-	
+
+	// Add this method if it's missing
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	public boolean isEnable() {
+		return enable;
+	}
 	
 
 

@@ -15,7 +15,6 @@ public class ErrController implements ErrorController {
 		return modelAndView;
 	}
 
-	@Override
 	public String getErrorPath() {
 		return "/error";
 	}

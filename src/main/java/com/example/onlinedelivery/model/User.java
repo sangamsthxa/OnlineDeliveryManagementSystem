@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "user")
@@ -72,6 +73,8 @@ public class User extends AuditModel {
 		this.contactNo = contactNo;
 		this.gender = gender;
 		this.roleName = roleName;
+		this.setCreatedAt(new Date());
+		this.setCreatedBy("onlinedelivery");
 	}
 
 
