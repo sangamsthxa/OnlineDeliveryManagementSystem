@@ -2,7 +2,7 @@
 FROM openjdk:17-jdk-slim
 
 # Copy the Spring Boot JAR into the image
-ARG JAR_FILE=onlinedelivery-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=target/onlinedelivery-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 
 

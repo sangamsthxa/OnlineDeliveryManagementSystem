@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: springboot-app
     ports:
-      - "8080:80"  # Maps external 8080 to internal app port 1111
+      - "8080:8080"  # Maps external 8080 to internal app port 1111
     depends_on:
       - mysql
     environment:
